@@ -34,11 +34,12 @@ class _HomeMateralPageStateFul extends State<HomeMateralPageStateFul> {
                 fontWeight: FontWeight.bold,
               ),
               ),
-             const TextField(
-                style: TextStyle(
+             TextField(
+              controller: textEditingController,
+                style: const TextStyle(
                   color: Color.fromARGB(255, 54, 153, 233),
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                  hintText: "Enter amount in USD",
                  filled: true,
                  fillColor: Color.fromARGB(255, 251, 251, 251),
@@ -61,7 +62,7 @@ class _HomeMateralPageStateFul extends State<HomeMateralPageStateFul> {
                   borderRadius: BorderRadius.all(Radius.elliptical(20, 20)),
                 ),
                 ),
-                keyboardType: TextInputType.numberWithOptions(
+                keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
                 ),
               ),
