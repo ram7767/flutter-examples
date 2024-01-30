@@ -17,7 +17,7 @@ class WeatherScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -25,8 +25,8 @@ class WeatherScreen extends StatelessWidget {
               width: double.infinity,
               child: ForecastCard(),
             ),
-            SizedBox(height: 20,),
-            Text(
+            const SizedBox(height: 20,),
+            const Text(
               "Weather Forecast",
               style: TextStyle(),),
 
@@ -59,13 +59,14 @@ class WeatherScreen extends StatelessWidget {
              ),
 
             const SizedBox(height: 20,),
-            
-            Text("Additional Information",
+            const Text("Additional Information",
             style: TextStyle(),),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                AddtionInformationWidget()
+                AddtionInformationWidget(),
+                 AddtionInformationWidget(),
+                  AddtionInformationWidget()
               ],
             ),
             const SizedBox(height: 20,),
