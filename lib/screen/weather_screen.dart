@@ -1,10 +1,19 @@
 import 'package:basic_weather_app/helper/forecast_card.dart';
 import 'package:basic_weather_app/helper/addtion_information_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 // Main Screen
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
+
+  Future getWeather() async {
+    String cityName = 'nandyal';
+    http.get(
+      Uri.parse(
+          'https://api.openweathermap.org/data/3.0/onecall?q=$cityName&appid=2700cb77f169014b47963479d60e46c1'),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +35,11 @@ class WeatherScreen extends StatelessWidget {
           children: [
             const SizedBox(
               width: double.infinity,
-              child: ForecastCard(),
+              child: ForecastCard(
+                icon: Icons.cloud,
+                degree: "22",
+                weather: "Cloud",
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -78,9 +91,12 @@ class WeatherScreen extends StatelessWidget {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                AddtionInformationWidget(),
-                AddtionInformationWidget(),
-                AddtionInformationWidget()
+                AddtionInformationWidget(
+                    icon: Icons.air, value: "16", weather: "Sunny"),
+                AddtionInformationWidget(
+                    icon: Icons.air, value: "16", weather: "Sunny"),
+                AddtionInformationWidget(
+                    icon: Icons.air, value: "16", weather: "Sunny"),
               ],
             ),
             const SizedBox(

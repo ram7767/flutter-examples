@@ -2,34 +2,39 @@ import 'package:flutter/material.dart';
 
 // AddtionInformationWidget
 class AddtionInformationWidget extends StatelessWidget {
-  const AddtionInformationWidget({
-    super.key,
-  });
+  final IconData icon;
+  final String weather;
+  final String value;
+  const AddtionInformationWidget(
+      {super.key,
+      required this.icon,
+      required this.weather,
+      required this.value});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         Icon(
-          Icons.water_drop_sharp,
+          icon,
           size: 32,
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         Text(
-          "weather",
-          style: TextStyle(
+          weather,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.normal,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         Text(
-          "16",
-          style: TextStyle(
+          value,
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
