@@ -28,7 +28,7 @@ class ForecastCard extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  degree,
+                  "$degree K",
                   style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
