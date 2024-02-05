@@ -1,16 +1,12 @@
 # basic_weather_app
+This is the basic flutter with some of the flutter concepts:
 
-A new Flutter project.
+1. Creation of the Custom Widgets
+2. Using the scrollable class
+3. Using the For-loop and List-View
+4. Using the http dependency 
+5. Accessing API and render the Data
+6. Proper Error handling.
+7. Using the **FutureBuilder** class and **Future methods**
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

@@ -36,7 +36,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
   }
 
   IconData getIcons(String iconName) {
-    print(iconName);
     switch (iconName) {
       case '01d':
         return Icons.wb_sunny_rounded;
@@ -137,106 +136,105 @@ class _WeatherScreenState extends State<WeatherScreen> {
           final currentPressure = currentData['main']['pressure'];
           final currentHumidity = currentData['main']['humidity'];
 
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 50,
-                  width: double.infinity,
-                  child: TextField(
-                    textInputAction: TextInputAction.go,
-                    onSubmitted: (value) {
-                      setState(() {
-                        weather = getWeather(location.text);
-                        location.clear();
-                      });
-                    },
-                    controller: location,
-                    decoration: const InputDecoration(
-                      hintText: "Enter Location",
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 30,
+                    width: double.infinity,
+                    child: TextField(
+                      textInputAction: TextInputAction.go,
+                      onSubmitted: (value) {
+                        setState(() {
+                          weather = getWeather(location.text);
+                          location.clear();
+                        });
+                      },
+                      controller: location,
+                      decoration: const InputDecoration(
+                        hintText: "Enter Location",
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Center(
-                  child: Text(
-                    data['city']['name'],
-                    style: const TextStyle(
-                      fontSize: 16,
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                    child: Text(
+                      data['city']['name'],
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: ForecastCard(
-                    icon:
-                        getIcons(currentData['weather'][0]['icon'].toString()),
-                    degree: currentData['main']['temp'].toString(),
-                    weather:
-                        currentData['weather'][0]['description'].toString(),
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  "Weather Forecast",
-                  style: TextStyle(),
-                ),
-                SizedBox(
-                  height: 120,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 15,
-                      itemBuilder: (context, index) {
-                        final hourlyForecast =
-                            data['list'][index + 1]['dt_txt'];
-                        final icon = getIcons(data['list'][index + 1]['weather']
-                                [0]['icon']
-                            .toString());
-                        final temp = data['list'][index + 1]['main']['temp'];
-                        final time = DateTime.parse(hourlyForecast);
-                        return HourlyForecastCard(
-                            time: DateFormat('j').format(time),
-                            icon: icon,
-                            temp: temp);
-                      }),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  "Additional Information",
-                  style: TextStyle(),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    AddtionInformationWidget(
-                        icon: Icons.water_drop,
-                        value: currentHumidity.toString(),
-                        weather: "Humidity"),
-                    AddtionInformationWidget(
-                        icon: Icons.air,
-                        value: currentWind.toString(),
-                        weather: "Wind Speed"),
-                    AddtionInformationWidget(
-                        icon: Icons.umbrella_rounded,
-                        value: currentPressure.toString(),
-                        weather: "Pressure"),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-              ],
+                  SizedBox(
+                    width: double.infinity,
+                    child: ForecastCard(
+                      icon:
+                          getIcons(currentData['weather'][0]['icon'].toString()),
+                      degree: currentData['main']['temp'].toString(),
+                      weather:
+                          currentData['weather'][0]['description'].toString(),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    "Weather Forecast",
+                    style: TextStyle(),
+                  ),
+                  SizedBox(
+                    height: 120,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 15,
+                        itemBuilder: (context, index) {
+                          final hourlyForecast =
+                              data['list'][index + 1]['dt_txt'];
+                          final icon = getIcons(data['list'][index + 1]['weather']
+                                  [0]['icon']
+                              .toString());
+                          final temp = data['list'][index + 1]['main']['temp'];
+                          final time = DateTime.parse(hourlyForecast);
+                          return HourlyForecastCard(
+                              time: DateFormat('j').format(time),
+                              icon: icon,
+                              temp: temp);
+                        }),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    "Additional Information",
+                    style: TextStyle(),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      AddtionInformationWidget(
+                          icon: Icons.water_drop,
+                          value: currentHumidity.toString(),
+                          weather: "Humidity"),
+                      AddtionInformationWidget(
+                          icon: Icons.air,
+                          value: currentWind.toString(),
+                          weather: "Wind Speed"),
+                      AddtionInformationWidget(
+                          icon: Icons.umbrella_rounded,
+                          value: currentPressure.toString(),
+                          weather: "Pressure"),
+                    ],
+                  ),
+                ],
+              ),
             ),
           );
         },
