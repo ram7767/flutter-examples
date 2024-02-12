@@ -1,4 +1,6 @@
+import 'package:basic_e_commerce_app/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final Map<String, Object> product;
@@ -14,7 +16,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('title'),
+        title: Text(widget.product['company'] as String),
       ),
       body: Column(
         children: [
@@ -79,7 +81,28 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (selectedSize != 0) {
+                        Provider.of<CartProvider>(context, listen: false)
+                            .addProduct(
+                          {
+                            'id': widget.product['id'],
+                            'title': widget.product['title'],
+                            'prices': widget.product['prices'],
+                            'sizes': selectedSize,
+                            'imageUrl': widget.product['imageUrl'],
+                            'company': widget.product['company'],
+                          },
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Product added succuesfully")));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Please select a size")));
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
                         minimumSize: Size(double.infinity, 50)),
