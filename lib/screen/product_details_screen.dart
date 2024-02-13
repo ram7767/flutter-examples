@@ -36,9 +36,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             flex: 2,
           ),
           Container(
-            height: 250,
+            height: 200,
             decoration: BoxDecoration(
-              color: Color.fromRGBO(207, 200, 235, 0.782),
+              color: const Color.fromRGBO(207, 200, 235, 0.782),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
@@ -83,8 +83,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (selectedSize != 0) {
-                        Provider.of<CartProvider>(context, listen: false)
-                            .addProduct(
+                        context.read<CartProvider>().addProduct(
                           {
                             'id': widget.product['id'],
                             'title': widget.product['title'],
@@ -104,8 +103,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        minimumSize: Size(double.infinity, 50)),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      maximumSize: const Size(300, 50),
+                    ),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

@@ -16,7 +16,6 @@ class _ProductListState extends State<ProductList> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     seletedFilter = filter[0];
   }
@@ -29,7 +28,7 @@ class _ProductListState extends State<ProductList> {
           Row(
             children: [
               Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Text(
                   'Shoe\ncollection',
                   style: Theme.of(context).textTheme.titleLarge,
@@ -76,8 +75,8 @@ class _ProductListState extends State<ProductList> {
                         item,
                         style: TextStyle(
                             color: seletedFilter == item
-                                ? Color.fromARGB(255, 0, 0, 0)
-                                : Color.fromARGB(255, 160, 99, 188)),
+                                ? const Color.fromARGB(255, 0, 0, 0)
+                                : const Color.fromARGB(255, 160, 99, 188)),
                       ),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 15.0),
@@ -96,23 +95,58 @@ class _ProductListState extends State<ProductList> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                final product = products[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return ProductDetailsScreen(product: product);
-                    }));
-                  },
-                  child: ProductCard(
-                    title: product['title'] as String,
-                    cost: product['prices'] as double,
-                    imageUrl: product['imageUrl'] as String,
-                  ),
-                );
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth > 1028) {
+                  return Expanded(
+                    child: GridView.builder(
+                      itemCount: products.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 1.2,
+                      ),
+                      itemBuilder: (context, index) {
+                        final product = products[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return ProductDetailsScreen(product: product);
+                            }));
+                          },
+                          child: ProductCard(
+                            title: product['title'] as String,
+                            cost: product['prices'] as double,
+                            imageUrl: product['imageUrl'] as String,
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: products.length,
+                      itemBuilder: (context, index) {
+                        final product = products[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return ProductDetailsScreen(product: product);
+                            }));
+                          },
+                          child: ProductCard(
+                            title: product['title'] as String,
+                            cost: product['prices'] as double,
+                            imageUrl: product['imageUrl'] as String,
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }
               },
             ),
           ),

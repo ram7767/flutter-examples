@@ -12,14 +12,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => CartProvider(),
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => CartProvider())],
       child: MaterialApp(
         title: "shopping",
         debugShowCheckedModeBanner: false,
-        home: HomePageScreen(),
+        home: const HomePageScreen(),
         theme: ThemeData(
-          appBarTheme: AppBarTheme(
+          appBarTheme: const AppBarTheme(
             titleTextStyle: TextStyle(
               fontSize: 20,
               color: Colors.black,
@@ -30,10 +30,10 @@ class MyApp extends StatelessWidget {
               prefixIconColor: Color.fromARGB(228, 102, 189, 220),
               hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
           colorScheme: ColorScheme.fromSeed(
-            seedColor: Color.fromARGB(255, 82, 172, 197),
-            primary: Color.fromARGB(255, 143, 215, 236),
+            seedColor: const Color.fromARGB(255, 82, 172, 197),
+            primary: const Color.fromARGB(255, 143, 215, 236),
           ),
-          textTheme: TextTheme(
+          textTheme: const TextTheme(
             titleLarge: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
             titleMedium: TextStyle(
               fontWeight: FontWeight.bold,

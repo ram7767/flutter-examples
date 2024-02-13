@@ -7,10 +7,10 @@ class CartListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CartProvider>(context).cart;
+    final cart = context.watch<CartProvider>().cart;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cart"),
+        title: const Center(child: Text("Cart")),
       ),
       body: ListView.builder(
           itemCount: cart.length,
@@ -22,7 +22,45 @@ class CartListScreen extends StatelessWidget {
                 radius: 30,
               ),
               trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                              'Delete Product',
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            content: const Text(
+                                "Are sure you want to delete product?"),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text(
+                                    "No",
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                              TextButton(
+                                  onPressed: () {
+                                    context
+                                        .read<CartProvider>()
+                                        .deleteProduct(cartItem);
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text(
+                                    "Yes",
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                            ],
+                          );
+                        });
+                  },
                   icon: const Icon(
                     Icons.delete,
                     color: Colors.red,

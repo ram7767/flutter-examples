@@ -13,31 +13,35 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.0),
-      margin: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
-          color: Color.fromARGB(228, 188, 244, 255),
+          color: const Color.fromARGB(228, 188, 244, 255),
           borderRadius: BorderRadius.circular(20)),
-      child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        const SizedBox(
-          height: 3,
-        ),
-        Text(
-          '\$$cost',
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        const SizedBox(
-          height: 3,
-        ),
-        Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(
+            height: 3,
+          ),
+          Text(
+            '\$$cost',
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+          const SizedBox(
+            height: 3,
+          ),
+          Center(
             child: Image(
-          image: AssetImage(imageUrl),
-        ))
-      ]),
+              image: AssetImage(imageUrl),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
